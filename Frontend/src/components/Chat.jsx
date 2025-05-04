@@ -29,7 +29,7 @@ const ChatBot = () => {
       // 2) send in { input: ... } form
       const { data } = await axios.post(
         'http://localhost:5005/populateAnswer',
-        { input: text }
+        { query_ques: text }
       );
       // 3) take the output field
       const assistantMsg = { role: 'assistant', content: data.output };
