@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import './css/SupplierList.css'; // External CSS for styling
+import { Link } from 'react-router-dom';
 
 const SupplierList = () => {
   const [suppliers, setSuppliers] = useState([]); // List of suppliers
@@ -24,26 +25,32 @@ const SupplierList = () => {
   }, []);
 
   return (
-    <div className="supplier-container">
-      <h1 className="supplier-title">Supplier List</h1>
+    <div className="supplier-list-container">
+      <div className="supplier-list-header">
+        <h1 className="supplier-list-title">Supplier Management</h1>
+        <div className="supplier-list-actions">
+          <Link to="/supplier" className="supplier-list-button">Add New Supplier</Link>
+        </div>
+      </div>
 
       {loading ? (
         <p>Loading suppliers...</p> // Display loading message while data is being fetched
       ) : (
-        <div className="supplier-list">
-          <table className="supplier-table">
+        <div className="supplier-list-table-container">
+          <table className="supplier-list-table">
             <thead>
               <tr>
                 <th>Name</th>
                 <th>Contact Info</th>
                 <th>Delivery Terms</th>
+                <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {suppliers.length === 0 ? (
                 <tr>
-                  <td colSpan="4">No suppliers found.</td>
+                  <td colSpan="5">No suppliers found.</td>
                 </tr>
               ) : (
                 suppliers.map((supplier) => (
@@ -52,15 +59,20 @@ const SupplierList = () => {
                     <td>{JSON.stringify(supplier.contactInfo)}</td>
                     <td>{supplier.deliveryTerms}</td>
                     <td>
+                      <span className={`supplier-status status-${supplier.status?.toLowerCase() || 'active'}`}>
+                        {supplier.status || 'Active'}
+                      </span>
+                    </td>
+                    <td className="supplier-actions">
                       <button
                         onClick={() => window.location.href = `/supplier/${supplier.id}`}
-                        className="view-button"
+                        className="supplier-action-button view-button"
                       >
                         View
                       </button>
                       <button
                         onClick={() => window.location.href = `/supplier/edit/${supplier.id}`}
-                        className="edit-button"
+                        className="supplier-action-button edit-button"
                       >
                         Edit
                       </button>

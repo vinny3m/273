@@ -47,7 +47,7 @@ const ChatBot = () => {
   return (
     <div className="chat-container">
       <header className="chat-header">
-        <h2>SQL Agent Chat</h2>
+        <h2 className="chat-title">Smart Assistant</h2>
       </header>
 
       <div className="chat-messages">

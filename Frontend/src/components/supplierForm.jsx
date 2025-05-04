@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import './css/Form.css';
 
 const SupplierForm = () => {
   const [name, setName] = useState('');
@@ -8,7 +9,7 @@ const SupplierForm = () => {
   const [deliveryTerms, setDeliveryTerms] = useState('');
   const [address, setAddress] = useState('');
   const { id } = useParams();
-  const navigate = useNavigate();  // Updated to use useNavigate
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (id) {
@@ -30,36 +31,66 @@ const SupplierForm = () => {
     const supplierData = { name, contactInfo, deliveryTerms, address };
     if (id) {
       axios.put(`/api/supplier/${id}`, supplierData)
-        .then(() => navigate('/suppliers'))  // Updated to use navigate
+        .then(() => navigate('/suppliers'))
         .catch(error => console.error('Error updating supplier', error));
     } else {
       axios.post('/api/supplier', supplierData)
-        .then(() => navigate('/suppliers'))  // Updated to use navigate
+        .then(() => navigate('/suppliers'))
         .catch(error => console.error('Error adding supplier', error));
     }
   };
 
   return (
-    <div>
-      <h2>{id ? 'Edit Supplier' : 'Add New Supplier'}</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
+    <div className="form-container">
+      <header className="form-header">
+        <h2 className="form-title">{id ? 'Edit Supplier' : 'Add New Supplier'}</h2>
+      </header>
+
+      <form onSubmit={handleSubmit} className="form-content">
+        <div className="form-group">
           <label>Name</label>
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+          <input 
+            type="text" 
+            value={name} 
+            onChange={(e) => setName(e.target.value)} 
+            required 
+          />
         </div>
-        <div>
+
+        <div className="form-group">
           <label>Contact Info</label>
-          <textarea value={contactInfo} onChange={(e) => setContactInfo(e.target.value)} required></textarea>
+          <textarea 
+            value={contactInfo} 
+            onChange={(e) => setContactInfo(e.target.value)} 
+            required 
+            rows="4"
+          />
         </div>
-        <div>
+
+        <div className="form-group">
           <label>Delivery Terms</label>
-          <input type="text" value={deliveryTerms} onChange={(e) => setDeliveryTerms(e.target.value)} required />
+          <input 
+            type="text" 
+            value={deliveryTerms} 
+            onChange={(e) => setDeliveryTerms(e.target.value)} 
+            required 
+          />
         </div>
-        <div>
+
+        <div className="form-group">
           <label>Address</label>
-          <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
+          <textarea 
+            value={address} 
+            onChange={(e) => setAddress(e.target.value)} 
+            rows="3"
+          />
         </div>
-        <button type="submit">{id ? 'Update Supplier' : 'Add Supplier'}</button>
+
+        <div className="form-actions">
+          <button type="submit" className="form-button">
+            {id ? 'Update Supplier' : 'Add Supplier'}
+          </button>
+        </div>
       </form>
     </div>
   );

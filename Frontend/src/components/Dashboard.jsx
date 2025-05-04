@@ -13,6 +13,7 @@ import {
   Bar,
   AreaChart,
   Area,
+  ResponsiveContainer
 } from 'recharts';
 
 const Dashboard = () => {
@@ -98,84 +99,175 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <h2 className="dashboard-title">Dashboard</h2>
+      <header className="dashboard-header">
+        <h2 className="dashboard-title" style={{
+          fontFamily: 'var(--font-secondary)',
+          color: 'var(--white)',
+          fontSize: '1.5rem',
+          fontWeight: '600',
+          letterSpacing: '0.5px',
+          margin: '0'
+        }}>SCM Dashboard</h2>
+      </header>
 
-      <div className="dashboard-stats">
-        <div className="stat-card">
-          <h3>Inventory Overview</h3>
-          <p>
-            Total Products in Inventory:{' '}
-            {inventory.reduce(
-              (sum, item) => sum + (parseInt(item.stock) || 0),
-              0
-            )}
-          </p>
-        </div>
-
-        <div className="stat-card">
-          <h3>Order Processing</h3>
-          <p>Total Orders Processed: {totalOrders}</p>
-        </div>
-
-        <div className="stat-card">
-          <h3>Supplier Management</h3>
-          <p>Total Suppliers: {totalSuppliers}</p>
-        </div>
-      </div>
-
-      <div className="charts-container">
-        <div className="row">
-          <div className="chart">
-            <h3>Inventory Tracking</h3>
-            <LineChart width={350} height={300} data={inventoryHistory}>
-              {inventory.map((item) => (
-                <Line
-                  key={item.productId}
-                  type="monotone"
-                  dataKey={item.productName}
-                  stroke={colorMap[item.productName] || '#000'}
-                  strokeWidth={2}
-                  name={item.productName}
-                />
-              ))}
-              <CartesianGrid stroke="#e0e0e0" />
-              <XAxis dataKey="time" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-            </LineChart>
+      <div className="dashboard-content">
+        <div className="dashboard-stats">
+          <div className="stat-card">
+            <h3 style={{
+              fontFamily: 'var(--font-secondary)',
+              color: 'var(--primary)',
+              fontSize: '1.1rem',
+              fontWeight: '600',
+              letterSpacing: '0.3px'
+            }}>
+              Inventory Overview
+            </h3>
+            <p style={{
+              fontFamily: 'var(--font-primary)',
+              color: 'var(--primary-dark)',
+              fontSize: '1.75rem',
+              fontWeight: '700'
+            }}>
+              {inventory.reduce(
+                (sum, item) => sum + (parseInt(item.stock) || 0),
+                0
+              )}
+            </p>
           </div>
 
-          <div className="chart">
-            <h3>Orders Tracking</h3>
-            <BarChart width={350} height={300} data={ordersHistory}>
-              <Bar dataKey="value" fill="#2196f3" name="Orders" />
-              <CartesianGrid stroke="#e0e0e0" />
-              <XAxis dataKey="time" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-            </BarChart>
+          <div className="stat-card">
+            <h3 style={{
+              fontFamily: 'var(--font-secondary)',
+              color: 'var(--primary)',
+              fontSize: '1.1rem',
+              fontWeight: '600',
+              letterSpacing: '0.3px'
+            }}>
+              Order Processing
+            </h3>
+            <p style={{
+              fontFamily: 'var(--font-primary)',
+              color: 'var(--primary-dark)',
+              fontSize: '1.75rem',
+              fontWeight: '700'
+            }}>
+              {totalOrders}
+            </p>
+          </div>
+
+          <div className="stat-card">
+            <h3 style={{
+              fontFamily: 'var(--font-secondary)',
+              color: 'var(--primary)',
+              fontSize: '1.1rem',
+              fontWeight: '600',
+              letterSpacing: '0.3px'
+            }}>
+              Supplier Management
+            </h3>
+            <p style={{
+              fontFamily: 'var(--font-primary)',
+              color: 'var(--primary-dark)',
+              fontSize: '1.75rem',
+              fontWeight: '700'
+            }}>
+              {totalSuppliers}
+            </p>
           </div>
         </div>
 
-        <div className="row">
-          <div className="chart">
-            <h3>Suppliers Tracking</h3>
-            <AreaChart width={700} height={300} data={suppliersHistory}>
-              <Area
-                type="monotone"
-                dataKey="value"
-                stroke="#ff5722"
-                fill="#ffccbc"
-                name="Suppliers"
-              />
-              <CartesianGrid stroke="#e0e0e0" />
-              <XAxis dataKey="time" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-            </AreaChart>
+        <div className="charts-container">
+          <div className="chart-card">
+            <h3 style={{
+              fontFamily: 'var(--font-secondary)',
+              color: 'var(--primary)',
+              fontSize: '1.1rem',
+              fontWeight: '600',
+              letterSpacing: '0.3px'
+            }}>
+              Inventory Tracking
+            </h3>
+            <div className="chart-content">
+              <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={inventoryHistory}>
+                  {inventory.map((item) => (
+                    <Line
+                      key={item.productId}
+                      type="monotone"
+                      dataKey={item.productName}
+                      stroke={colorMap[item.productName] || '#8B5CF6'}
+                      strokeWidth={2}
+                      name={item.productName}
+                      dot={false}
+                    />
+                  ))}
+                  <CartesianGrid stroke="#E5E7EB" />
+                  <XAxis dataKey="time" stroke="#6B7280" />
+                  <YAxis stroke="#6B7280" />
+                  <Tooltip />
+                  <Legend />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          <div className="chart-card">
+            <h3 style={{
+              fontFamily: 'var(--font-secondary)',
+              color: 'var(--primary)',
+              fontSize: '1.1rem',
+              fontWeight: '600',
+              letterSpacing: '0.3px'
+            }}>
+              Orders Tracking
+            </h3>
+            <div className="chart-content">
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={ordersHistory}>
+                  <Bar 
+                    dataKey="value" 
+                    fill="#8B5CF6" 
+                    name="Orders"
+                    radius={[4, 4, 0, 0]}
+                  />
+                  <CartesianGrid stroke="#E5E7EB" />
+                  <XAxis dataKey="time" stroke="#6B7280" />
+                  <YAxis stroke="#6B7280" />
+                  <Tooltip />
+                  <Legend />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          <div className="chart-card">
+            <h3 style={{
+              fontFamily: 'var(--font-secondary)',
+              color: 'var(--primary)',
+              fontSize: '1.1rem',
+              fontWeight: '600',
+              letterSpacing: '0.3px'
+            }}>
+              Suppliers Tracking
+            </h3>
+            <div className="chart-content">
+              <ResponsiveContainer width="100%" height={300}>
+                <AreaChart data={suppliersHistory}>
+                  <Area
+                    type="monotone"
+                    dataKey="value"
+                    stroke="#8B5CF6"
+                    fill="#C4B5FD"
+                    name="Suppliers"
+                  />
+                  <CartesianGrid stroke="#E5E7EB" />
+                  <XAxis dataKey="time" stroke="#6B7280" />
+                  <YAxis stroke="#6B7280" />
+                  <Tooltip />
+                  <Legend />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
           </div>
         </div>
       </div>

@@ -25,15 +25,19 @@ const OrderList = () => {
   }, []);
 
   return (
-    <div className="order-container">
-      <h1 className="order-title">Order List</h1>
-      <Link to="/order" className="action-link">Add Order</Link>
+    <div className="order-list-container">
+      <div className="order-list-header">
+        <h1 className="order-list-title">Order Management</h1>
+        <div className="order-list-actions">
+          <Link to="/order" className="order-list-button">Add New Order</Link>
+        </div>
+      </div>
 
       {loading ? (
         <p>Loading orders...</p> // Display loading message while data is being fetched
       ) : (
-        <div className="order-list">
-          <table className="order-table">
+        <div className="order-list-table-container">
+          <table className="order-list-table">
             <thead>
               <tr>
                 <th>Order ID</th>
@@ -54,19 +58,23 @@ const OrderList = () => {
                   <tr key={order.id}>
                     <td>{order.id}</td>
                     <td>{order.customerName}</td>
-                    <td>{order.status}</td>
+                    <td>
+                      <span className={`order-status status-${order.status.toLowerCase()}`}>
+                        {order.status}
+                      </span>
+                    </td>
                     <td>${order.totalAmount}</td>
                     <td>{new Date(order.createdAt).toLocaleString()}</td>
-                    <td>
+                    <td className="order-actions">
                       <button
                         onClick={() => window.location.href = `/order/${order.id}`}
-                        className="view-button"
+                        className="order-action-button view-button"
                       >
                         View
                       </button>
                       <button
                         onClick={() => window.location.href = `/order/edit/${order.id}`}
-                        className="edit-button"
+                        className="order-action-button edit-button"
                       >
                         Edit
                       </button>

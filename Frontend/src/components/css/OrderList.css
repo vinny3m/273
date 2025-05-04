@@ -1,172 +1,184 @@
 /* OrderList.css */
+@import './theme.css';
 
-/* General container styling */
-.order-container {
-    padding: 30px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7fb;
-    min-height: 100vh;
+.order-list-container {
+  padding: var(--spacing-lg);
+  background-color: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  margin: var(--spacing-lg) auto;
+  width: 70vw;
+}
+
+.order-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.order-list-title {
+  font-family: var(--font-secondary);
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.order-list-actions {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.order-list-button {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-primary);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+}
+
+.order-list-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.order-list-button:active {
+  transform: translateY(0);
+}
+
+.order-list-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: var(--spacing-md);
+}
+
+.order-list-table th {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--white);
+  font-weight: 600;
+  text-align: left;
+  padding: var(--spacing-md);
+  font-family: var(--font-primary);
+}
+
+.order-list-table td {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--accent);
+  font-family: var(--font-primary);
+  color: var(--text-primary);
+}
+
+.order-list-table tr:hover {
+  background-color: var(--background);
+}
+
+.order-status {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+  display: inline-block;
+}
+
+.status-pending {
+  background-color: var(--accent);
+  color: var(--primary-dark);
+}
+
+.status-processing {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.status-completed {
+  background-color: var(--success-light);
+  color: var(--success);
+}
+
+.status-cancelled {
+  background-color: var(--error-light);
+  color: var(--error);
+}
+
+.order-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.view-button {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--white);
+  border: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.edit-button {
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+  color: var(--white);
+  border: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.delete-button {
+  background-color: var(--error-light);
+  color: var(--error);
+}
+
+.order-action-button {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.order-action-button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .order-list-container {
+    width: 85vw;
   }
-  
-  /* Title styling */
-  .order-title {
-    font-size: 32px;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 30px;
-    text-align: center;
-    letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .order-list-container {
+    width: 95vw;
+    padding: var(--spacing-md);
+    margin: var(--spacing-md);
   }
-  
-  /* Order list styling */
-  .order-list {
-    overflow-x: auto;
-    margin-top: 40px;
+
+  .order-list-header {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: flex-start;
   }
-  
-  /* Table setup */
-  .order-table {
+
+  .order-list-actions {
     width: 100%;
-    border-radius: 8px;
-    border-collapse: collapse;
-    background-color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
+    justify-content: flex-start;
   }
-  
-  /* Header styling */
-  .order-table th {
-    padding: 15px;
-    background-color: #3498db;
-    color: #fff;
-    font-weight: 600;
-    text-align: left;
-    font-size: 16px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+
+  .order-list-table {
+    display: block;
+    overflow-x: auto;
   }
-  
-  /* Table row styling */
-  .order-table td {
-    padding: 15px;
-    color: #555;
-    font-size: 14px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    vertical-align: middle;
+
+  .order-actions {
+    flex-direction: column;
   }
-  
-  /* Hover effects for rows */
-  .order-table tbody tr:hover {
-    background-color: #f5f8fb;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  }
-  
-  /* Styling for empty order message */
-  .order-table td[colspan="5"] {
-    text-align: center;
-    color: #999;
-    font-style: italic;
-    padding: 20px;
-  }
-  
-  /* Button styling */
-  .view-order-button,
-  .edit-order-button,
-  .delete-order-button {
-    padding: 10px 15px;
-    font-size: 14px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.3s ease;
-  }
-  
-  .view-order-button {
-    background-color: #3498db;
-    color: #fff;
-    margin-right: 10px;
-  }
-  
-  .view-order-button:hover {
-    background-color: #2980b9;
-    transform: scale(1.05);
-  }
-  
-  .edit-order-button {
-    background-color: #f39c12;
-    color: #fff;
-    margin-right: 10px;
-  }
-  
-  .edit-order-button:hover {
-    background-color: #e67e22;
-    transform: scale(1.05);
-  }
-  
-  .delete-order-button {
-    background-color: #e74c3c;
-    color: #fff;
-  }
-  
-  .delete-order-button:hover {
-    background-color: #c0392b;
-    transform: scale(1.05);
-  }
-  
-  /* Responsive Design for Small Screens */
-  @media (max-width: 768px) {
-    .order-container {
-      padding: 20px;
-    }
-  
-    .order-title {
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-  
-    .order-table th,
-    .order-table td {
-      font-size: 14px;
-      padding: 12px;
-    }
-  
-    .view-order-button,
-    .edit-order-button,
-    .delete-order-button {
-      padding: 8px 12px;
-    }
-  }
-  
-  /* Additional Style for Tables on Mobile */
-  @media (max-width: 576px) {
-    .order-table th,
-    .order-table td {
-      display: block;
-      width: 100%;
-      padding: 12px 10px;
-      text-align: right;
-    }
-  
-    .order-table td {
-      text-align: left;
-      position: relative;
-      padding-left: 40%;
-    }
-  
-    .order-table td::before {
-      content: attr(data-label);
-      position: absolute;
-      left: 10px;
-      top: 12px;
-      font-weight: 600;
-      color: #777;
-    }
-  
-    .order-table td {
-      padding-left: 50%;
-    }
-  }
+}
   
