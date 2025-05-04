@@ -1,0 +1,159 @@
+/* SupplierList.css */
+
+/* General container styling */
+.supplier-container {
+    padding: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fb;
+    min-height: 100vh;
+  }
+  
+  /* Title styling */
+  .supplier-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Table styling */
+  .supplier-list {
+    overflow-x: auto;
+    margin-top: 40px;
+  }
+  
+  /* Table setup */
+  .supplier-table {
+    width: 100%;
+    border-radius: 8px;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Header styling */
+  .supplier-table th {
+    padding: 15px;
+    background-color: #3498db;
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+    font-size: 16px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  /* Table row styling */
+  .supplier-table td {
+    padding: 15px;
+    color: #555;
+    font-size: 14px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+  }
+  
+  /* Hover effects for rows */
+  .supplier-table tbody tr:hover {
+    background-color: #f5f8fb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Styling for empty supplier message */
+  .supplier-table td[colspan="4"] {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 20px;
+  }
+  
+  /* Button styling */
+  .view-button,
+  .edit-button {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  .view-button {
+    background-color: #3498db;
+    color: #fff;
+    margin-right: 10px;
+  }
+  
+  .view-button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+  }
+  
+  .edit-button {
+    background-color: #f39c12;
+    color: #fff;
+  }
+  
+  .edit-button:hover {
+    background-color: #e67e22;
+    transform: scale(1.05);
+  }
+  
+  /* Responsive Design for Small Screens */
+  @media (max-width: 768px) {
+    .supplier-container {
+      padding: 20px;
+    }
+  
+    .supplier-title {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+  
+    .supplier-table th,
+    .supplier-table td {
+      font-size: 14px;
+      padding: 12px;
+    }
+  
+    .view-button,
+    .edit-button {
+      padding: 8px 12px;
+    }
+  }
+  
+  /* Additional Style for Tables on Mobile */
+  @media (max-width: 576px) {
+    .supplier-table th,
+    .supplier-table td {
+      display: block;
+      width: 100%;
+      padding: 12px 10px;
+      text-align: right;
+    }
+  
+    .supplier-table td {
+      text-align: left;
+      position: relative;
+      padding-left: 40%;
+    }
+  
+    .supplier-table td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 10px;
+      top: 12px;
+      font-weight: 600;
+      color: #777;
+    }
+  
+    .supplier-table td {
+      padding-left: 50%;
+    }
+  }
+  
